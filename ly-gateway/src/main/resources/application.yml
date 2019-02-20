@@ -11,6 +11,10 @@ zuul:
   prefix: /api # 添加路由前缀
   routes:
     item-service: /item/**
+    upload-service:
+      path: /upload/**
+      serviceId: upload-service
+      strip-prefix: false
 hystrix:
   command:
     default:
@@ -23,3 +27,4 @@ ribbon:
   ReadTimeout: 3500 # ribbon读取超时时长
   MaxAutoRetries: 0 # 当前服务重试次数
   MaxAutoRetriesNextServer: 0 #切换服务重试次数
+

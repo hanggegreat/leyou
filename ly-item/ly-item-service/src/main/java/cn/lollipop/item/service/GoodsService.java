@@ -6,23 +6,19 @@ import cn.lollipop.item.mapper.SkuMapper;
 import cn.lollipop.item.mapper.SpuDetailMapper;
 import cn.lollipop.item.mapper.SpuMapper;
 import cn.lollipop.item.mapper.StockMapper;
-import cn.lollipop.item.pojo.Category;
-import cn.lollipop.item.pojo.Spu;
-import cn.lollipop.item.pojo.SpuDetail;
-import cn.lollipop.item.pojo.Stock;
+import cn.lollipop.item.pojo.*;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 import tk.mybatis.mapper.entity.Example;
 import vo.PageResult;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -67,7 +63,7 @@ public class GoodsService {
 
         // 查询
         List<Spu> list = spuMapper.selectByExample(example);
-        if (list == null) {
+        if (CollectionUtils.isEmpty(list)) {
             throw new LyException(ExceptionConstant.GOODS_NOT_FOUND);
         }
 
@@ -106,10 +102,76 @@ public class GoodsService {
         spu.getSpuDetail().setSpuId(spu.getId());
         spuDetailMapper.insert(spu.getSpuDetail());
 
+        // 新增sku、stock
+        saveSkuAndStock(spu);
+    }
+
+    public SpuDetail querySpuDetailById(Long id) {
+        SpuDetail detail = spuDetailMapper.selectByPrimaryKey(id);
+        if (detail == null) {
+            throw new LyException(ExceptionConstant.GOODS_DETAIL_NOT_FOUND);
+        }
+        return detail;
+    }
+
+    public List<Sku> querySkuListBySpuId(Long id) {
+        Sku sku = new Sku();
+        sku.setSpuId(id);
+        List<Sku> skus = skuMapper.select(sku);
+        if (skus == null) {
+            throw new LyException(ExceptionConstant.GOODS_SKU_NOT_FOUND);
+        }
+
+        // 库存查询
+        List<Long> ids = skus.stream().map(Sku::getId).collect(Collectors.toList());
+        List<Stock> stockList = stockMapper.selectByIdList(ids);
+        if (stockList == null) {
+            throw new LyException(ExceptionConstant.GOODS_STOCK_NOT_FOUND);
+        }
+
+        Map<Long, Integer> stockMap = stockList.stream().collect(Collectors.toMap(Stock::getSkuId, Stock::getStock));
+        skus.forEach(s -> s.setStock(stockMap.get(s.getId())));
+        return skus;
+    }
+
+    @Transactional
+    public void editGoods(Spu spu) {
+        if (spu == null || spu.getId() == null) {
+            throw new LyException(ExceptionConstant.INVALID_PARAM);
+        }
+
+        // 删除sku、stock
+        Sku sku = new Sku();
+        sku.setSpuId(spu.getId());
+        List<Sku> oldSkuList = skuMapper.select(sku);
+        if (oldSkuList != null) {
+            List<Long> ids = oldSkuList.stream().map(Sku::getId).collect(Collectors.toList());
+            skuMapper.deleteByIdList(ids);
+            stockMapper.deleteByIdList(ids);
+        }
+
+        // 修改spu
+        spu.setValid(null);
+        spu.setSaleable(null);
+        spu.setLastUpdateTime(new Date());
+        spu.setCreateTime(null);
+
+        if (spuMapper.updateByPrimaryKeySelective(spu) != 1) {
+            throw new LyException(ExceptionConstant.GOODS_UPDATE_ERROR);
+        }
+
+        // 修改detail
+        spuDetailMapper.updateByPrimaryKeySelective(spu.getSpuDetail());
+
+        // 新增sku、stock
+        saveSkuAndStock(spu);
+    }
+
+    private void saveSkuAndStock(Spu spu) {
         List<Stock> stockList = new ArrayList<>();
         // 新增sku
         spu.getSkus().forEach(sku -> {
-            sku.setCreateTime(spu.getCreateTime());
+            sku.setCreateTime(spu.getLastUpdateTime());
             sku.setLastUpdateTime(spu.getLastUpdateTime());
             sku.setSpuId(spu.getId());
             if (skuMapper.insert(sku) != 1) {
@@ -126,13 +188,5 @@ public class GoodsService {
         if (stockMapper.insertList(stockList) != stockList.size()) {
             throw new LyException(ExceptionConstant.GOODS_SAVE_ERROR);
         }
-    }
-
-    public SpuDetail querySpuDetailById(Long id) {
-        SpuDetail detail = spuDetailMapper.selectByPrimaryKey(id);
-        if (detail == null) {
-            throw new LyException(ExceptionConstant.GOODS_DETAIL_NOT_FOUND);
-        }
-        return detail;
     }
 }

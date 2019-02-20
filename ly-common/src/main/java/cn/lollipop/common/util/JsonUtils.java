@@ -3,17 +3,19 @@ package cn.lollipop.common.util;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.lang.Nullable;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-@Slf4j
 public class JsonUtils {
 
     public static final ObjectMapper mapper = new ObjectMapper();
+
+    private static final Logger logger = LoggerFactory.getLogger(JsonUtils.class);
 
     @Nullable
     public static String serialize(Object obj) {
@@ -26,7 +28,7 @@ public class JsonUtils {
         try {
             return mapper.writeValueAsString(obj);
         } catch (JsonProcessingException e) {
-            log.error("json序列化出错：" + obj, e);
+            logger.error("json序列化出错：" + obj, e);
             return null;
         }
     }
@@ -36,7 +38,7 @@ public class JsonUtils {
         try {
             return mapper.readValue(json, tClass);
         } catch (IOException e) {
-            log.error("json解析出错：" + json, e);
+            logger.error("json解析出错：" + json, e);
             return null;
         }
     }
@@ -46,7 +48,7 @@ public class JsonUtils {
         try {
             return mapper.readValue(json, mapper.getTypeFactory().constructCollectionType(List.class, eClass));
         } catch (IOException e) {
-            log.error("json解析出错：" + json, e);
+            logger.error("json解析出错：" + json, e);
             return null;
         }
     }
@@ -56,7 +58,7 @@ public class JsonUtils {
         try {
             return mapper.readValue(json, mapper.getTypeFactory().constructMapType(Map.class, kClass, vClass));
         } catch (IOException e) {
-            log.error("json解析出错：" + json, e);
+            logger.error("json解析出错：" + json, e);
             return null;
         }
     }
@@ -66,7 +68,7 @@ public class JsonUtils {
         try {
             return mapper.readValue(json, type);
         } catch (IOException e) {
-            log.error("json解析出错：" + json, e);
+            logger.error("json解析出错：" + json, e);
             return null;
         }
     }
