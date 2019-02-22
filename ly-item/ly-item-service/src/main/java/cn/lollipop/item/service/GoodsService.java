@@ -189,4 +189,16 @@ public class GoodsService {
             throw new LyException(ExceptionConstant.GOODS_SAVE_ERROR);
         }
     }
+
+    public Spu querySpuById(Long id) {
+        Spu spu = spuMapper.selectByPrimaryKey(id);
+        if (spu == null) {
+            throw new LyException(ExceptionConstant.GOODS_NOT_FOUND);
+        }
+        // 查询sku
+        spu.setSkus(querySkuListBySpuId(id));
+        // 查询detail
+        spu.setSpuDetail(querySpuDetailById(id));
+        return spu;
+    }
 }

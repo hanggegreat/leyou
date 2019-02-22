@@ -13,8 +13,12 @@ import java.util.List;
 @RestController
 @RequestMapping("brand")
 public class BrandController {
+    private final BrandService brandService;
+
     @Autowired
-    private BrandService brandService;
+    public BrandController(BrandService brandService) {
+        this.brandService = brandService;
+    }
 
     /**
      * 分页查询品牌信息
@@ -73,8 +77,35 @@ public class BrandController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
+    /**
+     * 查询商品分类下的所有品牌信息
+     *
+     * @param cid
+     * @return
+     */
     @GetMapping("cid/{cid}")
     public ResponseEntity<List<Brand>> queryBrandByCid(@PathVariable Long cid) {
         return ResponseEntity.ok(brandService.queryByCid(cid));
+    }
+
+    /**
+     * 根据品牌id查询品牌信息
+     *
+     * @param id 品牌id
+     * @return
+     */
+    @GetMapping("{id}")
+    public ResponseEntity<Brand> queryBrandById(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(brandService.queryById(id));
+    }
+
+    /**
+     * 根据id查询全部品牌信息
+     * @param ids
+     * @return
+     */
+    @GetMapping("list")
+    public ResponseEntity<List<Brand>> queryBrandByIds(@RequestParam("ids") List<Long> ids) {
+        return ResponseEntity.ok(brandService.queryBrandByIds(ids));
     }
 }

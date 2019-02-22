@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -76,7 +75,7 @@ public class SpecificationController {
      * @return
      */
     @GetMapping("params")
-    public ResponseEntity<List<SpecParam>> queryParamByGid(Long gid, Long cid, Boolean searching) {
+    public ResponseEntity<List<SpecParam>> queryParamList(Long gid, Long cid, Boolean searching) {
         return ResponseEntity.ok(specificationService.queryParamList(gid, cid, searching));
     }
 
@@ -113,5 +112,16 @@ public class SpecificationController {
     public ResponseEntity<Void> deleteParam(@PathVariable Long pid) {
         specificationService.deleteParam(pid);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
+    /**
+     * 根据分类查询规格组及组内参数
+     *
+     * @param cid
+     * @return
+     */
+    @GetMapping("group")
+    public ResponseEntity<List<SpecGroup>> queryListByCid(@RequestParam("cid") Long cid) {
+        return ResponseEntity.ok(specificationService.queryListByCid(cid));
     }
 }

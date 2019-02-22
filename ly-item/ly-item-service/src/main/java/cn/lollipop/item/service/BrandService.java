@@ -120,4 +120,12 @@ public class BrandService {
         }
         return list;
     }
+
+    public List<Brand> queryBrandByIds(List<Long> ids) {
+        List<Brand> list = brandMapper.selectByIdList(ids);
+        if (CollectionUtils.isEmpty(list)) {
+            throw new LyException(ExceptionConstant.BRAND_NOT_FOUNT);
+        }
+        return list;
+    }
 }

@@ -4,7 +4,6 @@ import cn.lollipop.item.pojo.Sku;
 import cn.lollipop.item.pojo.Spu;
 import cn.lollipop.item.pojo.SpuDetail;
 import cn.lollipop.item.service.GoodsService;
-import org.mockito.Spy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -43,7 +42,7 @@ public class GoodsController {
      * @param spu Spu信息
      * @return
      */
-    @PostMapping("/goods")
+    @PostMapping("goods")
     public ResponseEntity<Void> saveGoods(@RequestBody Spu spu) {
         goodsService.saveGoods(spu);
         return ResponseEntity.status(HttpStatus.CREATED).build();
@@ -55,7 +54,7 @@ public class GoodsController {
      * @param spu 新的spu信息
      * @return
      */
-    @PutMapping("/goods")
+    @PutMapping("goods")
     public ResponseEntity<Void> editGoods(@RequestBody Spu spu) {
         goodsService.editGoods(spu);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
@@ -67,7 +66,7 @@ public class GoodsController {
      * @param id spuId
      * @return
      */
-    @GetMapping("/spu/detail/{id}")
+    @GetMapping("spu/detail/{id}")
     public ResponseEntity<SpuDetail> querySpuDetailById(@PathVariable("id") Long id) {
         return ResponseEntity.ok(goodsService.querySpuDetailById(id));
     }
@@ -78,8 +77,19 @@ public class GoodsController {
      * @param id spuId
      * @return
      */
-    @GetMapping("/sku/list")
+    @GetMapping("sku/list")
     public ResponseEntity<List<Sku>> querySkuListBySpuId(Long id) {
         return ResponseEntity.ok(goodsService.querySkuListBySpuId(id));
+    }
+
+    /**
+     * 根据id查询spu信息
+     *
+     * @param id
+     * @return
+     */
+    @GetMapping("spu/{id}")
+    public ResponseEntity<Spu> querySpuById(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(goodsService.querySpuById(id));
     }
 }

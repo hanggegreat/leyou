@@ -44,4 +44,12 @@ public class CategoryService {
         }
         return list;
     }
+
+    public Category queryCategoryById(Long id) {
+        Category category = categoryMapper.selectByPrimaryKey(id);
+        if (category == null) {
+            throw new LyException(ExceptionConstant.CATEGORY_NOT_FOUND);
+        }
+        return category;
+    }
 }
