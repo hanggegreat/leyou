@@ -59,11 +59,21 @@ public class PageService {
         context.setVariables(loadModel(spuId));
         // 输出流
         File dest = new File("F:/usr/" + spuId + ".html");
+        if (dest.exists()) {
+            dest.delete();
+        }
         try (PrintWriter writer = new PrintWriter(dest, "UTF8")) {
             // 生成HTML
             templateEngine.process("item", context, writer);
         } catch (Exception e) {
             log.error("[静态服务]：生成静态页面异常", e);
+        }
+    }
+
+    public void deleteHtml(Long spuId) {
+        File dest = new File("F:/usr/" + spuId + ".html");
+        if (dest.exists()) {
+            dest.delete();
         }
     }
 }

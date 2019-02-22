@@ -11,3 +11,5 @@
 [5. 全文检索模块：ly-elasticsearch](https://github.com/hanggegreat/leyou/tree/master/ly-search)  
 
 [6. 文件上传模块：ly-upload](https://github.com/hanggegreat/leyou/tree/master/ly-upload)  
+
+[7. 静态页面模块：ly-page](https://github.com/hanggegreat/leyou/tree/master/ly-page)  

@@ -11,6 +11,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,16 +32,18 @@ public class GoodsService {
     private final StockMapper stockMapper;
     private final CategoryService categoryService;
     private final BrandService brandService;
+    private final AmqpTemplate amqpTemplate;
 
 
     @Autowired
-    public GoodsService(SpuMapper spuMapper, SpuDetailMapper spuDetailMapper, SkuMapper skuMapper, StockMapper stockMapper, CategoryService categoryService, BrandService brandService) {
+    public GoodsService(SpuMapper spuMapper, SpuDetailMapper spuDetailMapper, SkuMapper skuMapper, StockMapper stockMapper, CategoryService categoryService, BrandService brandService, AmqpTemplate amqpTemplate) {
         this.spuMapper = spuMapper;
         this.spuDetailMapper = spuDetailMapper;
         this.skuMapper = skuMapper;
         this.stockMapper = stockMapper;
         this.categoryService = categoryService;
         this.brandService = brandService;
+        this.amqpTemplate = amqpTemplate;
     }
 
     public PageResult<Spu> querySpuByPage(String key, Boolean saleable, Integer page, Integer row) {
@@ -104,6 +107,9 @@ public class GoodsService {
 
         // 新增sku、stock
         saveSkuAndStock(spu);
+
+        // 发送mq消息
+        amqpTemplate.convertAndSend("item.insert", spu.getId());
     }
 
     public SpuDetail querySpuDetailById(Long id) {
@@ -165,6 +171,9 @@ public class GoodsService {
 
         // 新增sku、stock
         saveSkuAndStock(spu);
+
+        // 发送mq消息
+        amqpTemplate.convertAndSend("item.update", spu.getId());
     }
 
     private void saveSkuAndStock(Spu spu) {

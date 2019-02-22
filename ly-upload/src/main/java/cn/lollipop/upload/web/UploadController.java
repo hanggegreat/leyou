@@ -12,8 +12,12 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("upload")
 public class UploadController {
 
+    private final UploadService uploadService;
+
     @Autowired
-    private UploadService uploadService;
+    public UploadController(UploadService uploadService) {
+        this.uploadService = uploadService;
+    }
 
     /**
      * 上传图片
