@@ -675,7 +675,7 @@
                         ownSpec: JSON.stringify(this.ownSpec)
                     }).then(() => {
                         // 跳转到购物车列表页
-                        window.location.href = "http://www.lyshop.com/cart.html";
+                        window.location.href = "/cart.html";
                     }).catch(() => {
                         alert("添加购物车失败，请重试！");
                     })
@@ -701,7 +701,7 @@
                     // 未登录
                     ly.store.set("carts", carts);
                     // 跳转到购物车列表页
-                    window.location.href = "http://www.lyshop.com/cart.html";
+                    window.location.href = "/cart.html";
                 })
             },
             locked(id, i) {

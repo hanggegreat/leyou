@@ -123,21 +123,11 @@ public class GoodsService {
     public List<Sku> querySkuListBySpuId(Long id) {
         Sku sku = new Sku();
         sku.setSpuId(id);
-        List<Sku> skus = skuMapper.select(sku);
-        if (skus == null) {
-            throw new LyException(ExceptionConstant.GOODS_SKU_NOT_FOUND);
-        }
-
+        List<Sku> list = skuMapper.select(sku);
         // 库存查询
-        List<Long> ids = skus.stream().map(Sku::getId).collect(Collectors.toList());
-        List<Stock> stockList = stockMapper.selectByIdList(ids);
-        if (stockList == null) {
-            throw new LyException(ExceptionConstant.GOODS_STOCK_NOT_FOUND);
-        }
-
-        Map<Long, Integer> stockMap = stockList.stream().collect(Collectors.toMap(Stock::getSkuId, Stock::getStock));
-        skus.forEach(s -> s.setStock(stockMap.get(s.getId())));
-        return skus;
+        List<Long> ids = list.stream().map(Sku::getId).collect(Collectors.toList());
+        loadStockInSku(ids, list);
+        return list;
     }
 
     @Transactional
@@ -209,5 +199,25 @@ public class GoodsService {
         // 查询detail
         spu.setSpuDetail(querySpuDetailById(id));
         return spu;
+    }
+
+    public List<Sku> querySkuListByIds(List<Long> ids) {
+        List<Sku> list = skuMapper.selectByIdList(ids);
+        if (list == null) {
+            throw new LyException(ExceptionConstant.GOODS_SKU_NOT_FOUND);
+        }
+
+        loadStockInSku(ids, list);
+        return list;
+    }
+
+    private void loadStockInSku(List<Long> ids, List<Sku> skuList) {
+        List<Stock> stockList = stockMapper.selectByIdList(ids);
+        if (stockList == null) {
+            throw new LyException(ExceptionConstant.GOODS_STOCK_NOT_FOUND);
+        }
+
+        Map<Long, Integer> stockMap = stockList.stream().collect(Collectors.toMap(Stock::getSkuId, Stock::getStock));
+        skuList.forEach(s -> s.setStock(stockMap.get(s.getId())));
     }
 }

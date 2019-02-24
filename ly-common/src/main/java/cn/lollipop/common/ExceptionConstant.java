@@ -30,7 +30,8 @@ public enum ExceptionConstant {
     GOODS_DETAIL_NOT_FOUND(404, "商品详细信息不存在！"),
     GOODS_STOCK_NOT_FOUND(404, "商品库存信息不存在！"),
     CREATE_TOKEN_ERROR(500, "用户凭证创建失败！"),
-    UNAUTHORIZED(403, "未授权用户");
+    UNAUTHORIZED(403, "未授权用户"),
+    CART_NOT_FOUND(404, "购物车为空");
 
     private int code;
     private String msg;

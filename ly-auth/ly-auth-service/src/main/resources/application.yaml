@@ -19,5 +19,5 @@ ly:
     secret: leyou@Login(Auth}*^31)&lollipop% # 登录校验的密钥
     pubKeyPath: G:/test/rsa.pub # 公钥地址
     priKeyPath: G:/test/rsa.pri # 私钥地址
-    expire: 30 # 过期时间,单位分钟
+    expire: 1800 # 过期时间,单位秒
     cookieName: LY_TOKEN
