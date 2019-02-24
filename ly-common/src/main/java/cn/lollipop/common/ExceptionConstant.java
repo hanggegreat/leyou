@@ -12,6 +12,8 @@ public enum ExceptionConstant {
     UPLOAD_FILE_ERROR(500, "文件上传失败！"),
     INVALID_FILE_TYPE(400, "无效的文件类型！"),
     INVALID_PARAM(400, "参数有误！"),
+    INVALID_VERIFY_CODE(400, "验证码错误！"),
+    INVALID_USERNAME_OR_PASSWORD(400, "用户名或密码错误！"),
     CATEGORY_NOT_FOUND(404, "未查询到商品分类信息！"),
     BRAND_NOT_FOUNT(404, "未查询到品牌信息！"),
     BRAND_SAVE_ERROR(500, "品牌信息增加失败！"),
@@ -24,9 +26,11 @@ public enum ExceptionConstant {
     GOODS_NOT_FOUND(404, "商品信息不存在！"),
     GOODS_SKU_NOT_FOUND(404, "商品SKU不存在！"),
     GOODS_SAVE_ERROR(500, "商品信息保存失败！"),
-    GOODS_UPDATE_ERROR(500, "商品信息更新失败"),
+    GOODS_UPDATE_ERROR(500, "商品信息更新失败！"),
     GOODS_DETAIL_NOT_FOUND(404, "商品详细信息不存在！"),
-    GOODS_STOCK_NOT_FOUND(404, "商品库存信息不存在！");
+    GOODS_STOCK_NOT_FOUND(404, "商品库存信息不存在！"),
+    CREATE_TOKEN_ERROR(500, "用户凭证创建失败！"),
+    UNAUTHORIZED(403, "未授权用户");
 
     private int code;
     private String msg;

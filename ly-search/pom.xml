@@ -7,7 +7,6 @@
         <artifactId>leyou</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
-    <groupId>cn.lollipop.service</groupId>
     <artifactId>ly-search</artifactId>
 
     <dependencies>
@@ -32,9 +31,9 @@
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
         <dependency>
-            <groupId>cn.lollipop.service</groupId>
+            <groupId>cn.lollipop</groupId>
             <artifactId>ly-item-interface</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+            <version>${leyou-latest.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

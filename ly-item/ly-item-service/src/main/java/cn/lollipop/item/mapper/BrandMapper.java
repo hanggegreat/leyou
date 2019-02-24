@@ -6,7 +6,6 @@ import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
-@org.apache.ibatis.annotations.Mapper
 public interface BrandMapper extends BaseMapper<Brand, Long> {
 
     @Insert("INSERT INTO tb_category_brand(category_id, brand_id) VALUES(#{cid}, #{bid})")

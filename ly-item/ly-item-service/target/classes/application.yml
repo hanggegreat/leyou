@@ -30,3 +30,4 @@ eureka:
 mybatis:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  type-aliases-package: cn.lollipop.item.pojo

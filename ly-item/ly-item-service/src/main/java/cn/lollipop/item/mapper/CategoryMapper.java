@@ -7,7 +7,6 @@ import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
-@org.apache.ibatis.annotations.Mapper
 public interface CategoryMapper extends BaseMapper<Category, Long> {
 
     @Select("SELECT id, name, parent_id, is_parent, sort " +

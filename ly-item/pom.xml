@@ -7,7 +7,6 @@
         <artifactId>leyou</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
-    <groupId>cn.lollipop.service</groupId>
     <artifactId>ly-item</artifactId>
     <packaging>pom</packaging>
     <modules>

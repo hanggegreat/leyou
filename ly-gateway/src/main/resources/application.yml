@@ -8,14 +8,18 @@ eureka:
     service-url:
       defaultZone: http://127.0.0.1:8761/eureka
 zuul:
-  prefix: /api # 添加路由前缀
+  prefix: /api # 路由路径前缀
   routes:
-    item-service: /item/**
-    search-service: /search/**
-    upload-service:
+    item-service: /item/** # 商品微服务
+    search-service: /search/** # 搜索微服务
+    user-service: /user/** # 用户微服务
+    auth-service: /auth/** # 授权中心微服务
+    upload-service: # 文件上传微服务
       path: /upload/**
       serviceId: upload-service
       strip-prefix: false
+  add-host-header: true # 携带请求本身的头部信息
+  sensitive-headers:
 hystrix:
   command:
     default:
@@ -29,3 +33,15 @@ ribbon:
   MaxAutoRetries: 0 # 当前服务重试次数
   MaxAutoRetriesNextServer: 0 #切换服务重试次数
 
+ly:
+  jwt:
+    pubKeyPath: G:/test/rsa.pub
+    cookieName: LY_TOKEN
+  filter:
+    allowPaths:
+      - /api/auth
+      - /api/search
+      - /api/user/register
+      - /api/user/check
+      - /api/user/code
+      - /api/item

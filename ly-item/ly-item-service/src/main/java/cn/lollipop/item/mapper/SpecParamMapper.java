@@ -4,7 +4,6 @@ import cn.lollipop.common.mapper.BaseMapper;
 import cn.lollipop.item.pojo.SpecParam;
 import org.apache.ibatis.annotations.Update;
 
-@org.apache.ibatis.annotations.Mapper
 public interface SpecParamMapper extends BaseMapper<SpecParam, Long> {
 
     @Update("UPDATE tb_spec_param " +

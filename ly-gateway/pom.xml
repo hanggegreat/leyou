@@ -20,5 +20,16 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>cn.lollipop</groupId>
+            <artifactId>ly-auth-common</artifactId>
+            <version>${leyou-latest.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.lollipop</groupId>
+            <artifactId>ly-common</artifactId>
+            <version>${leyou-latest.version}</version>
+        </dependency>
     </dependencies>
 </project>

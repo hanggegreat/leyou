@@ -13,6 +13,8 @@
         <module>ly-item</module>
         <module>ly-gateway</module>
         <module>ly-upload</module>
+        <module>ly-user</module>
+        <module>ly-auth</module>
     </modules>
     <packaging>pom</packaging>
 

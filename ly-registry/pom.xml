@@ -8,8 +8,6 @@
         <version>1.0.0-SNAPSHOT</version>
     </parent>
     <artifactId>ly-registry</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
-    <name>ly-registry</name>
 
     <dependencies>
         <dependency>
