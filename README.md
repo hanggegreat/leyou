@@ -63,7 +63,7 @@
 
 [认证微服务：ly-auth](https://github.com/hanggegreat/leyou/tree/master/ly-auth)
 ##### 认证服务：用户权限及服务权限认证
- - 权限管理
+ - 利用JWT实现无状态认证
  - 登录token生成
  - 登录token认证
  - 服务间token生成
