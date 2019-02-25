@@ -4,7 +4,7 @@
 乐优商城选择了以SpringCloud为核心的，基于Rest风格的微服务架构
 ### 1.2 系统架构
 
-![image](https://github.com/hanggegreat/leyou/tree/master/imgs/architecture.png)
+![image](https://raw.githubusercontent.com/hanggegreat/leyou/master/imgs/architecture.png)
 
  - 整个系统采用了前后端分离的开发模式
  - 前端基于Vue相关技术栈进行开发，并通过ajax与后端服务进行交互
