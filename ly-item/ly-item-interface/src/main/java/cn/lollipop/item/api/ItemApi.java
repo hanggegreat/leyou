@@ -1,10 +1,9 @@
 package cn.lollipop.item.api;
 
+import cn.lollipop.common.dto.CartDTO;
+import cn.lollipop.common.vo.PageResult;
 import cn.lollipop.item.pojo.*;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import vo.PageResult;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -93,4 +92,21 @@ public interface ItemApi {
      */
     @GetMapping("spec/group")
     List<SpecGroup> queryListByCid(@RequestParam("cid") Long cid);
+
+    /**
+     * 批量查询sku信息
+     *
+     * @param ids skuId集合
+     * @return
+     */
+    @GetMapping("sku/list/ids")
+    List<Sku> querySkuListByIds(@RequestParam("ids") List<Long> ids);
+
+    /**
+     * 减少库存
+     *
+     * @param cartDTOList
+     */
+    @PostMapping("stock/decrease")
+    void decreaseStock(@RequestBody List<CartDTO> cartDTOList);
 }

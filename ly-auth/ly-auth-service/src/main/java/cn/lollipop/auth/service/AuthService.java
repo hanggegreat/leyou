@@ -4,7 +4,7 @@ import cn.lollipop.auth.client.UserClient;
 import cn.lollipop.auth.config.JwtProperties;
 import cn.lollipop.auth.pojo.UserInfo;
 import cn.lollipop.auth.utils.JwtUtils;
-import cn.lollipop.common.ExceptionConstant;
+import cn.lollipop.common.constants.ExceptionConstant;
 import cn.lollipop.common.exception.LyException;
 import cn.lollipop.common.util.CookieUtils;
 import cn.lollipop.user.pojo.User;

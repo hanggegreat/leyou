@@ -1,6 +1,6 @@
 package cn.lollipop.search.service;
 
-import cn.lollipop.common.ExceptionConstant;
+import cn.lollipop.common.constants.ExceptionConstant;
 import cn.lollipop.common.exception.LyException;
 import cn.lollipop.common.util.JsonUtils;
 import cn.lollipop.item.pojo.*;
@@ -29,7 +29,7 @@ import org.springframework.data.elasticsearch.core.query.FetchSourceFilter;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
-import vo.PageResult;
+import cn.lollipop.common.vo.PageResult;
 
 import java.util.*;
 import java.util.stream.Collectors;

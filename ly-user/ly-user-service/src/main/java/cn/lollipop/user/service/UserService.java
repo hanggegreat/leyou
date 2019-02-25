@@ -1,6 +1,6 @@
 package cn.lollipop.user.service;
 
-import cn.lollipop.common.ExceptionConstant;
+import cn.lollipop.common.constants.ExceptionConstant;
 import cn.lollipop.common.exception.LyException;
 import cn.lollipop.common.util.NumberUtils;
 import cn.lollipop.user.mapper.UserMapper;

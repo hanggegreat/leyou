@@ -1,6 +1,7 @@
 package cn.lollipop.item.service;
 
-import cn.lollipop.common.ExceptionConstant;
+import cn.lollipop.common.constants.ExceptionConstant;
+import cn.lollipop.common.dto.CartDTO;
 import cn.lollipop.common.exception.LyException;
 import cn.lollipop.item.mapper.SkuMapper;
 import cn.lollipop.item.mapper.SpuDetailMapper;
@@ -17,7 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import tk.mybatis.mapper.entity.Example;
-import vo.PageResult;
+import cn.lollipop.common.vo.PageResult;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -219,5 +220,14 @@ public class GoodsService {
 
         Map<Long, Integer> stockMap = stockList.stream().collect(Collectors.toMap(Stock::getSkuId, Stock::getStock));
         skuList.forEach(s -> s.setStock(stockMap.get(s.getId())));
+    }
+
+    @Transactional
+    public void decreaseStock(List<CartDTO> cartDTOList) {
+        for (CartDTO cartDTO : cartDTOList) {
+            if (stockMapper.decreaseStock(cartDTO.getSkuId(), cartDTO.getNum()) != 1) {
+                throw new LyException(ExceptionConstant.STOCK_NOT_ENOUGH);
+            }
+        }
     }
 }

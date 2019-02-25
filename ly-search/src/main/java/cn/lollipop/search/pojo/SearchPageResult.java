@@ -5,7 +5,7 @@ import cn.lollipop.item.pojo.Category;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import vo.PageResult;
+import cn.lollipop.common.vo.PageResult;
 
 import java.util.List;
 import java.util.Map;

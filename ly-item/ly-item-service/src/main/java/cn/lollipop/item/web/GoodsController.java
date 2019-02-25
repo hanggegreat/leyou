@@ -1,5 +1,6 @@
 package cn.lollipop.item.web;
 
+import cn.lollipop.common.dto.CartDTO;
 import cn.lollipop.item.pojo.Sku;
 import cn.lollipop.item.pojo.Spu;
 import cn.lollipop.item.pojo.SpuDetail;
@@ -8,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import vo.PageResult;
+import cn.lollipop.common.vo.PageResult;
 
 import java.util.List;
 
@@ -102,5 +103,16 @@ public class GoodsController {
     @GetMapping("spu/{id}")
     public ResponseEntity<Spu> querySpuById(@PathVariable("id") Long id) {
         return ResponseEntity.ok(goodsService.querySpuById(id));
+    }
+
+    /**
+     * 减少库存
+     *
+     * @param cartDTOList
+     */
+    @PostMapping("stock/decrease")
+    public ResponseEntity<Void> decreaseStock(@RequestBody List<CartDTO> cartDTOList) {
+        goodsService.decreaseStock(cartDTOList);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }

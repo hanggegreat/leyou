@@ -1,0 +1,36 @@
+server:
+  port: 8089
+spring:
+  application:
+    name: order-service
+  datasource:
+    url: jdbc:mysql://192.168.161.101:3306/leyou?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false
+    username: root
+    password: 159637428
+    driver-class-name: org.gjt.mm.mysql.Driver
+  jackson:
+    default-property-inclusion: non_null
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8761/eureka
+  instance:
+    prefer-ip-address: true
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  type-aliases-package: cn.lollipop.order.pojo
+ly:
+  jwt:
+    pubKeyPath: G:/test/rsa.pub # \u516C\u94A5\u5730\u5740
+    cookieName: LY_TOKEN # cookie\u7684\u540D\u79F0
+  worker:
+    workerId: 1
+    dataCenterId: 1
+  pay:
+    appId: wx8397f8696b538317
+    mchId: 1473426802
+    key: T6m9iK73b0kn9g5v426MKfHQH7X8rKwb
+    connectTimeoutMs: 5000
+    readTimeoutMs: 10000
+    notifyUrl: http://c5ey3c.natappfree.cc/wxpay/notify/pay

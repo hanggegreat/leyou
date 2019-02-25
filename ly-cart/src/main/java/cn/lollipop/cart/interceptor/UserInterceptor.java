@@ -4,7 +4,7 @@ import cn.lollipop.auth.pojo.UserInfo;
 import cn.lollipop.auth.utils.JwtUtils;
 import cn.lollipop.cart.config.JwtProperties;
 import cn.lollipop.cart.utils.ThreadLocalUtils;
-import cn.lollipop.common.ExceptionConstant;
+import cn.lollipop.common.constants.ExceptionConstant;
 import cn.lollipop.common.exception.LyException;
 import cn.lollipop.common.util.CookieUtils;
 import lombok.extern.slf4j.Slf4j;

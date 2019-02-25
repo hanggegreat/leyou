@@ -1,6 +1,6 @@
 package cn.lollipop.item.service;
 
-import cn.lollipop.common.ExceptionConstant;
+import cn.lollipop.common.constants.ExceptionConstant;
 import cn.lollipop.common.exception.LyException;
 import cn.lollipop.item.mapper.SpecGroupMapper;
 import cn.lollipop.item.mapper.SpecParamMapper;

@@ -3,18 +3,15 @@ package cn.lollipop.cart.service;
 import cn.lollipop.auth.pojo.UserInfo;
 import cn.lollipop.cart.pojo.Cart;
 import cn.lollipop.cart.utils.ThreadLocalUtils;
-import cn.lollipop.common.ExceptionConstant;
+import cn.lollipop.common.constants.ExceptionConstant;
 import cn.lollipop.common.exception.LyException;
 import cn.lollipop.common.util.JsonUtils;
-import com.google.common.collect.Maps;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.BoundHashOperations;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service

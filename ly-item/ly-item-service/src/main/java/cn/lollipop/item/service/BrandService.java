@@ -1,6 +1,6 @@
 package cn.lollipop.item.service;
 
-import cn.lollipop.common.ExceptionConstant;
+import cn.lollipop.common.constants.ExceptionConstant;
 import cn.lollipop.common.exception.LyException;
 import cn.lollipop.item.mapper.BrandMapper;
 import cn.lollipop.item.pojo.Brand;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import tk.mybatis.mapper.entity.Example;
-import vo.PageResult;
+import cn.lollipop.common.vo.PageResult;
 
 import java.util.List;
 

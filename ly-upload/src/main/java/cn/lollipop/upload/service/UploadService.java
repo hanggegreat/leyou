@@ -1,6 +1,6 @@
 package cn.lollipop.upload.service;
 
-import cn.lollipop.common.ExceptionConstant;
+import cn.lollipop.common.constants.ExceptionConstant;
 import cn.lollipop.common.exception.LyException;
 import cn.lollipop.upload.config.UploadProperties;
 import com.github.tobato.fastdfs.domain.fdfs.StorePath;
