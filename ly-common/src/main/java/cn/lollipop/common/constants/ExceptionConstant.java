@@ -37,10 +37,10 @@ public enum ExceptionConstant {
     ORDER_NOT_FOUND(404, "订单不存在！"),
     ORDER_DETAIL_NOT_FOUND(404, "订单详情不存在！"),
     ORDER_STATUS_NOT_FOUND(404, "订单状态信息不存在！"),
-    WX_PAY_ORDER_FAIL(500,"微信下单失败！"),
-    PAY_ORDER_PARAM_ERROR(400,"订单参数有误！"),
-    ORDER_STATUS_ERROR(400,"订单状态异常！"),
-    UPDATE_ORDER_STATUS_ERROR(500,"更新订单状态失败！");
+    WX_PAY_ORDER_FAIL(500, "微信下单失败！"),
+    PAY_ORDER_PARAM_ERROR(400, "订单参数有误！"),
+    ORDER_STATUS_ERROR(400, "订单状态异常！"),
+    UPDATE_ORDER_STATUS_ERROR(500, "更新订单状态失败！");
 
     private int code;
     private String msg;

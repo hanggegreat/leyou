@@ -7,7 +7,6 @@ import cn.lollipop.gateway.config.FilterProperties;
 import cn.lollipop.gateway.config.JwtProperties;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
-import com.netflix.zuul.exception.ZuulException;
 import org.apache.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
@@ -55,7 +54,7 @@ public class AuthFilter extends ZuulFilter {
     }
 
     @Override
-    public Object run() throws ZuulException {
+    public Object run() {
         // 获取上下文
         RequestContext ctx = RequestContext.getCurrentContext();
         // 获取request

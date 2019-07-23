@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="ly-cart" />
+        <module name="ly-auth-service" />
+        <module name="ly-registry" />
+        <module name="ly-user-service" />
+        <module name="ly-gateway" />
+        <module name="ly-order" />
+        <module name="ly-item-interface" />
+        <module name="ly-user-interface" />
+        <module name="ly-common" />
+        <module name="ly-upload" />
+        <module name="ly-search" />
+        <module name="ly-page" />
+        <module name="ly-item-service" />
+        <module name="ly-sms" />
+        <module name="ly-auth-common" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="item-service" target="1.8" />
+      <module name="leyou-auth" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="item-service" options="-parameters" />
+      <module name="leyou-auth" options="-parameters" />
+      <module name="ly-auth" options="-parameters" />
+      <module name="ly-auth-common" options="-parameters" />
+      <module name="ly-auth-service" options="-parameters" />
+      <module name="ly-cart" options="-parameters" />
+      <module name="ly-common" options="-parameters" />
+      <module name="ly-gateway" options="-parameters" />
+      <module name="ly-item" options="-parameters" />
+      <module name="ly-item-interface" options="-parameters" />
+      <module name="ly-item-service" options="-parameters" />
+      <module name="ly-order" options="-parameters" />
+      <module name="ly-page" options="-parameters" />
+      <module name="ly-registry" options="-parameters" />
+      <module name="ly-search" options="-parameters" />
+      <module name="ly-sms" options="-parameters" />
+      <module name="ly-upload" options="-parameters" />
+      <module name="ly-user" options="-parameters" />
+      <module name="ly-user-interface" options="-parameters" />
+      <module name="ly-user-service" options="-parameters" />
+    </option>
+  </component>
+</project>

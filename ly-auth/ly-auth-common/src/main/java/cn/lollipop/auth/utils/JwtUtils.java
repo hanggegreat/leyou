@@ -2,6 +2,8 @@ package cn.lollipop.auth.utils;
 
 import cn.lollipop.auth.constants.JwtConstants;
 import cn.lollipop.auth.pojo.UserInfo;
+import cn.lollipop.common.constants.ExceptionConstant;
+import cn.lollipop.common.exception.LyException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
@@ -56,7 +58,7 @@ public class JwtUtils {
      * @return
      * @throws Exception
      */
-    private static Jws<Claims> parserToken(String token, PublicKey publicKey) {
+    private static Jws<Claims> parserToken(String token, PublicKey publicKey) throws Exception {
         return Jwts.parser().setSigningKey(publicKey).parseClaimsJws(token);
     }
 
@@ -84,6 +86,9 @@ public class JwtUtils {
     public static UserInfo getInfoFromToken(String token, PublicKey publicKey) throws Exception {
         Jws<Claims> claimsJws = parserToken(token, publicKey);
         Claims body = claimsJws.getBody();
+        if (body == null || body.get(JwtConstants.JWT_KEY_ID) == null || body.get(JwtConstants.JWT_KEY_USER_NAME) == null) {
+            throw new LyException(ExceptionConstant.UNAUTHORIZED);
+        }
         return new UserInfo(
                 ObjectUtils.toLong(body.get(JwtConstants.JWT_KEY_ID)),
                 ObjectUtils.toString(body.get(JwtConstants.JWT_KEY_USER_NAME))

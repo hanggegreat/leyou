@@ -59,7 +59,7 @@ public class RsaUtils {
     }
 
     /**
-     * 根据密文，生存rsa公钥和私钥,并写入指定文件
+     * 根据密文，生成rsa公钥和私钥,并写入指定文件
      *
      * @param publicKeyFilename  公钥文件路径
      * @param privateKeyFilename 私钥文件路径
@@ -72,10 +72,10 @@ public class RsaUtils {
         SecureRandom secureRandom = new SecureRandom(secret.getBytes());
         keyPairGenerator.initialize(1024, secureRandom);
         KeyPair keyPair = keyPairGenerator.genKeyPair();
-        // 获取公钥并写出
+        // 获取公钥并写入
         byte[] publicKeyBytes = keyPair.getPublic().getEncoded();
         writeFile(publicKeyFilename, publicKeyBytes);
-        // 获取私钥并写出
+        // 获取私钥并写入
         byte[] privateKeyBytes = keyPair.getPrivate().getEncoded();
         writeFile(privateKeyFilename, privateKeyBytes);
     }
