@@ -14,6 +14,9 @@
         <module>ly-gateway</module>
         <module>ly-upload</module>
         <module>ly-user</module>
+        <module>ly-page</module>
+        <module>ly-sms</module>
+        <module>ly-search</module>
         <module>ly-auth</module>
         <module>ly-cart</module>
         <module>ly-order</module>
