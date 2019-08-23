@@ -1,9 +1,8 @@
-## 乐优商城项目
+## 基于SpringCloud的在线商城系统
 
 ### 简介
 
-乐优商城是一个全品类的电商购物网站(B2C模式)，采用目前流行的微服务架构方案设计
-乐优商城选择了以SpringCloud为核心的，基于Rest风格的微服务架构。
+这是一个全品类的电商购物网站(B2C模式)，采用目前流行的微服务架构方案设计，以SpringCloud为核心的，基于Rest风格的微服务架构。
 
 ### 系统架构
 
@@ -238,7 +237,6 @@ GET /query
 ~~~java
 @GetMapping("/query")
     public ResponseEntity<User> queryUserByUsernameAndPassword(String username, String password)
-```认证微服务：ly-auth](ly-auth/ly-auth.md)
 ~~~
 
 
